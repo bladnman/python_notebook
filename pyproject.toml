@@ -9,7 +9,7 @@ readme = "README.md"
 python = "^3.8"
 
 [tool.poetry.scripts]
-run = "initial_project_name.main:main"
+run = "jupyter:notebook"
 install_notebook = "initial_project_name.install_notebook:main"
 
 [build-system]
