@@ -2,11 +2,11 @@ import subprocess
 import sys
 from pathlib import Path
 import importlib.util
-import pkg_resources
+from importlib.metadata import distributions
 
 def check_dependencies():
     required = {'ipykernel', 'jupyter', 'notebook'}
-    installed = {pkg.key for pkg in pkg_resources.working_set}
+    installed = {dist.metadata['Name'].lower() for dist in distributions()}
     missing = required - installed
     if missing:
         print(f"Missing required packages: {missing}")
