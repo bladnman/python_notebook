@@ -15,7 +15,7 @@ def main():
     if not check_kernel_installed():
         print("Jupyter kernel not found. Installing...")
         # Import and run the install_notebook script
-        from initial_project_name.install_notebook import main as install_notebook
+        from .install_notebook import main as install_notebook
         install_notebook()
     
     print("Starting Jupyter notebook server...")
