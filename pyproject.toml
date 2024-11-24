@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "initial_project_name"
+version = "0.1.0"
+description = "A wee python project"
+authors = ["Matt Maher <matt@maher-family.net>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+
+[tool.poetry.scripts]
+run = "initial_project_name.main:main"
+install_notebook = "initial_project_name.install_notebook:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
