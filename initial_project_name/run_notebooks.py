@@ -1,25 +1,18 @@
 import subprocess
 import sys
-from pathlib import Path
-
-def check_kernel_installed():
-    try:
-        import jupyter
-        # Check if kernel is installed by importing ipykernel
-        import ipykernel
-        return True
-    except ImportError:
-        return False
 
 def main():
-    if not check_kernel_installed():
-        print("Jupyter kernel not found. Installing...")
-        # Import and run the install_notebook script
-        from .install_notebook import main as install_notebook
-        install_notebook()
-    
-    print("Starting Jupyter notebook server...")
-    subprocess.run(["jupyter", "notebook"], check=True)
+    try:
+        # Try using jupyter-lab instead, which tends to be more stable
+        print("Starting Jupyter lab server...")
+        subprocess.run(["jupyter", "lab"], check=True)
+    except subprocess.CalledProcessError:
+        print("Error starting Jupyter lab. Trying notebook as fallback...")
+        try:
+            subprocess.run(["jupyter", "notebook", "--NotebookApp.contents_manager_class='notebook.services.contents.largefilemanager.LargeFileManager'"], check=True)
+        except subprocess.CalledProcessError as e:
+            print(f"Error starting Jupyter notebook: {e}")
+            sys.exit(1)
 
 if __name__ == "__main__":
-    main() 
+    main()
